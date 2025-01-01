@@ -25,8 +25,8 @@ test('should click on the frame', async ({ browser }) => {
 		'https://www.oracle.com/java/technologies/redistribution-policy.html'
 	);
 	await page.pause();
-    // await newPage.close();
-    await page.bringToFront();
+    await newPage.close();
+    // await page.bringToFront();
 
     await page
         .frame('packageListFrame')
@@ -34,4 +34,5 @@ test('should click on the frame', async ({ browser }) => {
         .click();
 
     await page.pause();
+
 });
