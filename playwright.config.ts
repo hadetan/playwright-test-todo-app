@@ -22,7 +22,7 @@ export default defineConfig({
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : 8, // Set this to the number of CPU cores
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
-	reporter: [['dot'], ['allure-playwright'], ['github'], ['html']],
+	reporter: [[process.env.CI ? 'dot' : 'html'], ['allure-playwright'], ['github']],
 	/* Update snapshots on CI */
 	updateSnapshots: 'missing',
 	// snapshotPathTemplate: '__screenshots__/{/projectName}/{testFilePath}/{arg}{ext}',
@@ -34,7 +34,7 @@ export default defineConfig({
 		// baseURL: 'http://127.0.0.1:3000',
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-		trace: 'on',
+		trace: 'on-first-retry',
 		screenshot: 'only-on-failure',
 	},
 

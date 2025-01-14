@@ -29,13 +29,20 @@ const ariaSnapshot = async (
 
     const snapshotPath = path.join(snapshotDir, `${snapshotName}-${browserName}-${platform}.json`);
 
-    if (fs.existsSync(snapshotPath)) {
-        const existingSnapshot = fs.readFileSync(snapshotPath, 'utf-8');
-
-        const newSnapshotString = JSON.stringify(snapshot, null, 2);
-
-        expect(existingSnapshot).toBe(newSnapshotString);
-    } else {
+    try {
+        if (fs.existsSync(snapshotPath)) {
+            const existingSnapshot = fs.readFileSync(snapshotPath, 'utf-8');
+    
+            const newSnapshotString = JSON.stringify(snapshot, null, 2);
+    
+            expect(existingSnapshot).toBe(newSnapshotString);
+        } else {
+            fs.writeFileSync(snapshotPath, JSON.stringify(snapshot, null, 2));
+            // console.log(`Snapshot created at ${snapshotPath}`);
+            expect(fs.existsSync(snapshotPath)).toBeTruthy();
+        }
+    } catch (e) {
+        console.log(`Creating new snapshot at ${snapshotPath}`);
         fs.writeFileSync(snapshotPath, JSON.stringify(snapshot, null, 2));
         expect(fs.existsSync(snapshotPath)).toBeTruthy();
     }

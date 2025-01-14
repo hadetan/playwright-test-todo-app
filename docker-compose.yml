@@ -1,0 +1,23 @@
+services:
+  todo-app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - screenshots:/app/tests/todo-app.spec.ts-snapshots
+      - snapshots:/app/utils/accessibility-snapshots
+      - playwright-report:/app/playwright-report
+      - test-results:/app/test-results
+      - allure-report:/app/allure-report
+      - allure-results:/app/allure-results
+    # command: >
+    #   sh -c "allure generate ./allure-results -o ./allure-report --clean &&
+    #         allure open ./allure-report"
+    
+volumes:
+  screenshots:
+  snapshots:
+  playwright-report:
+  test-results:
+  allure-report:
+  allure-results:
