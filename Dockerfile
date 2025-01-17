@@ -4,9 +4,8 @@ RUN apt-get update && \
     apt-get install -y openjdk-11-jdk && \
     apt-get clean;
 
-# Set JAVA_HOME environment variable
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
-ENV PATH $JAVA_HOME/bin:$PATH
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
 
 WORKDIR /app
 
@@ -20,8 +19,10 @@ RUN npm install -g allure-commandline --save-dev
 
 COPY . .
 
-COPY test-com.sh .
+COPY docker.sh .
 
-RUN chmod +x test-com.sh
+RUN chmod +x docker.sh
 
-CMD [ "./test-com.sh" ]
+EXPOSE 9323
+
+CMD [ "./docker.sh" ]

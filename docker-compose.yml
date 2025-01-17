@@ -2,17 +2,18 @@ services:
   todo-app:
     build: .
     ports:
-      - "3000:3000"
+      - "9323:9323"
     volumes:
       - screenshots:/app/tests/todo-app.spec.ts-snapshots
       - snapshots:/app/utils/accessibility-snapshots
-      - playwright-report:/app/playwright-report
-      - test-results:/app/test-results
-      - allure-report:/app/allure-report
+      # - playwright-report:/app/playwright-report
+      # - test-results:/app/test-results
+      # - allure-report:/app/allure-report
       - allure-results:/app/allure-results
-    # command: >
-    #   sh -c "allure generate ./allure-results -o ./allure-report --clean &&
-    #         allure open ./allure-report"
+      - C:/Users/HP/Desktop/Development/playwright/05/playwright-report:/app/playwright-report:rw
+      - C:/Users/HP/Desktop/Development/playwright/05/test-results:/app/test-results:rw
+      - C:/Users/HP/Desktop/Development/playwright/05/allure-report:/app/allure-report:rw
+      # - C:/Users/HP/Desktop/Development/playwright/05/allure-results:/app/allure-results:rw
     
 volumes:
   screenshots:

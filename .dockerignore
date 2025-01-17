@@ -12,8 +12,8 @@ docker-compose.yml
 coverage
 test-results
 playwright-report
-accessibility-snapshots
-todo-app.spec.ts-snapshots
+# accessibility-snapshots
+# todo-app.spec.ts-snapshots
 allure-report
 allure-results
 tests-examples
